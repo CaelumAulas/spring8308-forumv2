@@ -1,4 +1,4 @@
-package br.com.alura.forum.security.controller.dto.input;
+package br.com.alura.forum.security.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.forum.security.controller.dto.output.TokenOutputDto;
+import br.com.alura.forum.security.controller.jwt.TokenManager;
+import br.com.alura.forum.security.controller.jwt.UserInputDto;
 
 @RestController
 public class UserAuthenticationController {
