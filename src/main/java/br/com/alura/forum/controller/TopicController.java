@@ -17,8 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +40,7 @@ import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.CourseRepository;
 import br.com.alura.forum.repository.TopicRepository;
 import br.com.alura.forum.service.DashboardDataProcessingService;
+import br.com.alura.forum.validation.NewTopicCustomValidator;
 import br.com.alura.forum.vo.CategoriesAndTheirStatisticsData;
 
 @RestController
@@ -49,6 +52,9 @@ public class TopicController {
 	
 	@Autowired
 	private CourseRepository courseRepository;
+	
+	@Autowired
+	private NewTopicCustomValidator customValidator;
 	
 	@Autowired
 	private DashboardDataProcessingService dashboardDataProcessingService;
@@ -86,6 +92,11 @@ public class TopicController {
     			.toUri();
     	
 		return ResponseEntity.created(location).body(new TopicOutputDto(topic));
+    }
+    
+    @InitBinder("newTopicInputDto")
+    public void init(WebDataBinder binder) {
+    	binder.addValidators(customValidator);
     }
     
 }

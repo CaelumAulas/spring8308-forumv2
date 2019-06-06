@@ -10,7 +10,7 @@ import br.com.alura.forum.repository.CourseRepository;
 
 public class NewTopicInputDto {
 	@NotBlank
-	@Size(min = 10)
+	@Size(min = 18)
 	private String shortDescription;
 	@NotBlank
 	@Size(min = 5)
