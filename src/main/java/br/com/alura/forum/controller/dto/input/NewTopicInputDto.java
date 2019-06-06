@@ -1,13 +1,22 @@
 package br.com.alura.forum.controller.dto.input;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import br.com.alura.forum.model.Course;
 import br.com.alura.forum.model.User;
 import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.CourseRepository;
 
 public class NewTopicInputDto {
+	@NotBlank
+	@Size(min = 10)
 	private String shortDescription;
+	@NotBlank
+	@Size(min = 5)
     private String content;
+	@NotBlank
+	@Size(min = 4)
     private String courseName;
     
 	public String getShortDescription() {
